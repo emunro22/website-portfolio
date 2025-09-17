@@ -1,46 +1,62 @@
 import { useState } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
 
-export default function Navbar({ theme, toggleTheme }) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md shadow z-50">
+    <nav className="sticky top-0 bg-[#0B1220] shadow z-50">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold tracking-tight">Euan Munro</h1>
+        <h1 className="text-xl font-bold tracking-tight text-white">Euan Munro</h1>
 
-        {/* Desktop */}
-        <div className="hidden md:flex gap-6 items-center">
-          <a href="#about" className="hover:text-blue-600 transition">About</a>
-          <a href="#testimonials" className="hover:text-blue-600 transition">Testimonials</a>
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex gap-8 items-center text-white font-medium">
+          <a href="#about" className="hover:text-purple-300 transition">About</a>
+          <a href="#testimonials" className="hover:text-purple-300 transition">Testimonials</a>
+          <a href="#contact" className="hover:text-purple-300 transition">Contact</a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X /> : <Menu />}
+        {/* Hamburger Icon */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="relative w-8 h-6 flex flex-col justify-between md:hidden focus:outline-none z-50"
+          aria-label="Menu"
+        >
+          <span
+            className={`block h-0.5 bg-black dark:bg-white transition-all duration-300 ${
+              open ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 bg-black dark:bg-white transition-all duration-300 ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 bg-black dark:bg-white transition-all duration-300 ${
+              open ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-gray-100 dark:bg-gray-800 px-6 pb-4 flex flex-col gap-3">
-          <a href="#about" className="hover:text-blue-600 transition">About</a>
-          <a href="#testimonials" className="hover:text-blue-600 transition">Testimonials</a>
-          <button
-            onClick={toggleTheme}
-            className="self-start p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
-          </button>
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 bg-[#0B1220] text-white z-40 transition-transform duration-500 ease-in-out ${
+          open ? "translate-y-0" : "-translate-y-full"
+        } md:hidden`}
+      >
+        <div className="flex flex-col items-center justify-center h-full gap-10 text-2xl font-medium">
+          <a href="#about" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
+            About
+          </a>
+          <a href="#testimonials" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
+            Testimonials
+          </a>
+          <a href="#contact" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
+            Contact
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -26,9 +26,9 @@ export default function About() {
 
       <div className="bg-white dark:bg-gray-800 shadow rounded-2xl p-8 mb-12">
         <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-          I ran a successful web design business, delivering <span className="font-semibold">25+ projects</span> 
-          for private and public clients across diverse industries. I provide full-stack digital solutions — 
-          from planning and design to development, deployment, and support — with a focus on 
+          I ran a successful web design business, delivering <span className="font-semibold">25+ projects </span> 
+          for private and public clients across diverse industries. I provide full-stack digital solutions,
+          from planning and design to development, deployment, and support, with a focus on 
           clear communication and client value.
         </p>
         <p className="mt-4 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
