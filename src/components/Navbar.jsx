@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,9 +11,15 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-8 items-center text-white font-medium">
-          <a href="#about" className="hover:text-purple-300 transition">About</a>
-          <a href="#testimonials" className="hover:text-purple-300 transition">Testimonials</a>
-          <a href="#contact" className="hover:text-purple-300 transition">Contact</a>
+          <a href="#about" className="hover:text-purple-300 transition">
+            About
+          </a>
+          <a href="#testimonials" className="hover:text-purple-300 transition">
+            Testimonials
+          </a>
+          <a href="#contact" className="hover:text-purple-300 transition">
+            Contact
+          </a>
         </div>
 
         {/* Hamburger Icon */}
@@ -40,23 +47,39 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-[#0B1220] text-white z-40 transition-transform duration-500 ease-in-out ${
-          open ? "translate-y-0" : "-translate-y-full"
-        } md:hidden`}
-      >
-        <div className="flex flex-col items-center justify-center h-full gap-10 text-2xl font-medium">
-          <a href="#about" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
-            About
-          </a>
-          <a href="#testimonials" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
-            Testimonials
-          </a>
-          <a href="#contact" onClick={() => setOpen(false)} className="hover:text-purple-300 transition">
-            Contact
-          </a>
-        </div>
-      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ y: "-100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="fixed inset-0 bg-[#0B1220] text-white z-40 md:hidden"
+          >
+            <div className="flex flex-col items-center justify-center h-full gap-10 text-2xl font-medium">
+              <button
+                onClick={() => setOpen(false)}
+                className="hover:text-purple-300 transition"
+              >
+                <a href="#about">About</a>
+              </button>
+              <button
+                onClick={() => setOpen(false)}
+                className="hover:text-purple-300 transition"
+              >
+                <a href="#testimonials">Testimonials</a>
+              </button>
+              <button
+                onClick={() => setOpen(false)}
+                className="hover:text-purple-300 transition"
+              >
+                <a href="#contact">Contact</a>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
